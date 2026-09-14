@@ -11,7 +11,7 @@ index.html      cała treść strony
 style.css       style (kremowa biel, espresso, karmel)
 script.js       hero, menu mobilne, kursor-nożyczki, wejścia sekcji
 media/hero/     wideo hero i klatki z niego wycięte
-media/foto/     zdjęcia do galerii — puste, kafelki czekają na materiał
+media/foto/     sześć zdjęć do galerii ze stocka (patrz ZDJECIA.md)
 tools/          drobne narzędzia w Swifcie (patrz niżej)
 ```
 
@@ -23,8 +23,17 @@ w `.claude/launch.json`.
 Hero z wideo, sześć usług, cennik w czterech grupach, galeria czekająca na
 zdjęcia, kontakt z godzinami i podświetleniem dzisiejszego dnia, stopka.
 
-**Galeria** sama podstawi zdjęcia, gdy pojawią się pliki `media/foto/1.jpg`
-… `6.jpg` — skrypt sprawdza, czy plik istnieje, i dopiero wtedy ustawia tło.
+**Galeria** ma sześć zdjęć ze stocka, pobranych od razu w proporcjach kafelków
+— źródła i licencja w [ZDJECIA.md](ZDJECIA.md). Skrypt podstawia je dopiero po
+sprawdzeniu, czy plik istnieje, więc podmiana na zdjęcia prawdziwego salonu to
+tylko nadpisanie `media/foto/1.jpg` … `6.jpg`.
+
+**Usługi** to osobne kafelki: numer w kółku, karmelowa kreska wjeżdżająca od lewej
+przy najechaniu i delikatne uniesienie karty.
+
+**Cennik** jest złożony jak menu — każda grupa w osobnym panelu z karmelowym
+akcentem u góry, nazwy połączone z cenami kropkowanym łącznikiem. Poniżej 620 px
+łącznik znika, bo przy łamiących się nazwach zostawał jako krótki ogonek.
 
 **Telefon** siedzi w dwóch zmiennych na górze [script.js](script.js) i równolegle
 w `index.html`, żeby linki `tel:` działały nawet bez JavaScriptu.

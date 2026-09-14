@@ -288,34 +288,63 @@ img, video{ display:block; max-width:100%; }
 .uslugi{ padding: clamp(4rem, 10vw, 8rem) var(--margines); background: var(--krem-ciep); }
 .uslugi__wrap{ max-width: var(--max); margin:0 auto; }
 .karty{
-  margin-top: 3rem;
-  display:grid; gap: 1px;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  display:grid;
+  gap: clamp(10px, 1.2vw, 18px);
   /* Liczba kolumn na sztywno, nie przez `auto-fit`: sześć kafli dzieli się
-     bez reszty przez 1, 2 i 3, więc w siatce nigdy nie zostaje pusta komórka
-     (a przez 1 px odstępu prześwitywałoby przez nią ciemne tło siatki). */
+     bez reszty przez 1, 2 i 3, więc nigdy nie zostaje pusta komórka. */
   grid-template-columns: 1fr;
-  background: rgba(44,35,32,.1);
-  border: 1px solid rgba(44,35,32,.1);
 }
 .karta{
-  background: var(--krem-ciep);
-  /* na wąskim ekranie sztywne 2 rem z każdej strony zjadało jedną trzecią
-     szerokości i tekst łamał się po trzy słowa */
+  position: relative;
+  overflow: hidden;
+  background: var(--krem);
+  border: 1px solid var(--piasek);
+  border-radius: 6px;
   padding: clamp(1.6rem, 4vw, 2.4rem) clamp(1.25rem, 3.5vw, 2rem) clamp(1.8rem, 4.5vw, 2.6rem);
-  transition: background .35s ease;
+  transition: transform .35s cubic-bezier(.22,1,.36,1),
+              box-shadow .35s ease,
+              border-color .35s ease;
 }
-.karta:hover{ background: var(--krem); }
+/* karmelowa kreska wjeżdża od lewej przy najechaniu */
+.karta::before{
+  content:"";
+  position:absolute; top:0; left:0; right:0;
+  height: 2px;
+  background: var(--karmel);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .45s cubic-bezier(.22,1,.36,1);
+}
+.karta:hover{
+  transform: translateY(-4px);
+  border-color: rgba(180,134,79,.45);
+  box-shadow: 0 14px 30px -18px rgba(44,35,32,.45);
+}
+.karta:hover::before{ transform: scaleX(1); }
+
 .karta__nr{
+  display:inline-grid; place-items:center;
+  width: 2.1rem; height: 2.1rem;
+  border-radius: 50%;
+  background: var(--krem-ciep);
+  border: 1px solid var(--piasek);
   font-family: var(--serif);
-  font-size: 1.1rem;
+  font-size: .92rem;
   color: var(--karmel);
-  letter-spacing: .06em;
+  letter-spacing: 0;
+  transition: background .35s ease, color .35s ease, border-color .35s ease;
+}
+.karta:hover .karta__nr{
+  background: var(--karmel);
+  border-color: var(--karmel);
+  color: var(--krem);
 }
 .karta h3{
   font-family: var(--serif);
   font-weight: 600;
-  font-size: 1.5rem;
-  margin: .5rem 0 .7rem;
+  font-size: clamp(1.3rem, 1.1rem + .5vw, 1.55rem);
+  margin: .85rem 0 .6rem;
 }
 .karta p{ color: var(--brzoza); font-size: .93rem; }
 
@@ -324,28 +353,52 @@ img, video{ display:block; max-width:100%; }
 .cennik__wrap{ max-width: var(--max); margin:0 auto; }
 .cennik__wstep{ margin-top: 1.2rem; max-width: 56ch; color: var(--brzoza); font-size:.98rem; }
 .cennik__kolumny{
-  margin-top: 3rem;
-  display:grid; gap: 2.6rem 4rem;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  display:grid;
+  gap: clamp(12px, 1.4vw, 20px);
   grid-template-columns: 1fr;
+}
+.cennik__grupa{
+  background: var(--krem-ciep);
+  border-radius: 6px;
+  border-top: 2px solid var(--karmel);
+  padding: clamp(1.4rem, 3.5vw, 2rem) clamp(1.2rem, 3vw, 1.9rem) clamp(1rem, 2.5vw, 1.4rem);
 }
 .cennik__grupa h3{
   font-family: var(--serif);
   font-weight: 600;
-  font-size: 1.55rem;
-  padding-bottom: .7rem;
-  border-bottom: 1px solid var(--piasek);
-  margin-bottom: .4rem;
+  font-size: clamp(1.35rem, 1.15rem + .5vw, 1.6rem);
+  padding-bottom: .8rem;
+  margin-bottom: .3rem;
+  border-bottom: 0;
 }
 .cennik__grupa dl > div{
-  display:flex; align-items:baseline; gap: .8rem;
-  padding: .72rem 0;
-  border-bottom: 1px dotted rgba(44,35,32,.16);
+  display:flex; align-items:baseline; gap: .6rem;
+  padding: .68rem .4rem;
+  margin: 0 -.4rem;
+  border-radius: 4px;
+  border-bottom: 0;
+  transition: background .25s ease;
 }
+.cennik__grupa dl > div:hover{ background: rgba(250,246,240,.75); }
 .cennik__grupa dt{ font-size: .94rem; }
+/* Kropkowany łącznik rysowany elastycznym elementem — prowadzi wzrok od nazwy
+   do ceny i nie rozjeżdża się przy dowolnej długości nazwy. */
+.cennik__grupa dl > div::after{
+  content:"";
+  flex: 1 1 auto;
+  order: 1;
+  align-self: center;
+  height: 0;
+  margin-top: .35rem;
+  border-bottom: 1px dotted rgba(44,35,32,.3);
+  min-width: 1.5rem;
+}
 .cennik__grupa dd{
-  margin-left:auto;
+  order: 2;
+  font-family: var(--serif);
   font-weight: 600;
-  font-size: .94rem;
+  font-size: 1.08rem;
   color: var(--karmel);
   white-space: nowrap;
 }
@@ -631,6 +684,13 @@ img, video{ display:block; max-width:100%; }
    zatrzymuje się na liczbie kolumn, a nie na ich szerokości. */
 @media (min-width: 1600px){
   .galeria__siatka{ grid-auto-rows: clamp(200px, 15vw, 300px); }
+}
+
+/* Na wąskim ekranie nazwy zabiegów łamią się na dwie linie i kropkowany
+   łącznik zostaje jako krótki ogonek przy pierwszej — wtedy lepiej bez niego. */
+@media (max-width: 620px){
+  .cennik__grupa dl > div::after{ display: none; }
+  .cennik__grupa dt{ flex: 1 1 auto; }
 }
 
 /* ——— telefony ——— */

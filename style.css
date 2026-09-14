@@ -1,0 +1,666 @@
+/* ——————————————————————————————
+   Studio Fryzur Ambra — projekt demonstracyjny
+   Paleta: ciepła kremowa biel, espresso, karmel
+   —————————————————————————————— */
+
+:root{
+  --krem:      #faf6f0;
+  --krem-ciep: #f3ebe0;
+  --piasek:    #e7dbca;
+  --espresso:  #2c2320;
+  --brzoza:    #6d5c50;
+  --karmel:    #b4864f;
+  --karmel-ja: #cfa268;
+
+  /* Szerokość treści rośnie razem z ekranem, ale nie w nieskończoność —
+     powyżej ~1570 px linijka tekstu byłaby już za długa do czytania. */
+  --max: min(92vw, 1440px);
+  /* Jeden margines boczny dla wszystkich sekcji i dla paska nawigacji,
+     żeby treść pod paskiem trzymała się tej samej linii. */
+  --margines: clamp(1.1rem, 4vw, 2.6rem);
+
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --sans:  "Manrope", -apple-system, "Segoe UI", sans-serif;
+
+  --nav-h: clamp(64px, 6vw + 40px, 92px);
+}
+
+/* Cała typografia siedzi w rem, więc jedna zmienna skaluje stronę od małego
+   telefonu po monitor 4K: 15 px przy 320 px szerokości, 20 px powyżej 2240 px. */
+html{ font-size: clamp(15.5px, 13.95px + 0.16vw, 19.5px); }
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+
+html{ scroll-behavior:smooth; scroll-padding-top: var(--nav-h); }
+
+body{
+  background: var(--krem);
+  color: var(--espresso);
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a{ color: inherit; text-decoration: none; }
+img, video{ display:block; max-width:100%; }
+
+/* ——— wspólne ——— */
+.etykieta{
+  font-size: .74rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--karmel);
+  font-weight: 600;
+  margin-bottom: .9rem;
+}
+
+.naglowek{
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2.1rem, 5vw, 3.3rem);
+  line-height: 1.12;
+  letter-spacing: -.01em;
+}
+.naglowek em{ font-style: italic; color: var(--karmel); }
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding: .95rem 1.9rem;
+  border-radius: 999px;
+  font-size: .92rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  border: 1px solid transparent;
+  transition: transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease;
+  white-space: nowrap;
+}
+.btn--pelny{ background: var(--espresso); color: var(--krem); }
+.btn--pelny:hover{ background: var(--karmel); transform: translateY(-2px); }
+.btn--pusty{ border-color: currentColor; }
+.btn--pusty:hover{ background: var(--espresso); color: var(--krem); border-color: var(--espresso); transform: translateY(-2px); }
+.btn--duzy{ padding: 1.1rem 2.4rem; font-size: 1rem; }
+
+/* ——— nawigacja ——— */
+.nav{
+  position: fixed; inset: 0 0 auto 0;
+  height: var(--nav-h);
+  z-index: 50;
+  display:flex; align-items:center; gap: 2rem;
+  padding: 0 var(--margines);
+  background: rgba(250,246,240,.95);
+  border-bottom: 1px solid rgba(44,35,32,.07);
+  transition: transform .8s cubic-bezier(.22,1,.36,1);
+}
+.js .nav{ transform: translateY(-100%); }
+.js .nav.jest-widoczny{ transform: none; }
+
+.nav__logo{ display:flex; align-items:center; margin-right:auto; }
+.nav__logo img{
+  /* trochę niższe niż pasek, żeby zostało powietrze nad i pod znakiem */
+  height: calc(var(--nav-h) - 24px); width: auto;
+  /* logo ma własne, jaśniejsze tło wycięte do przezroczystości — na pasku
+     nawigacji siedzi więc wprost na kremie strony */
+}
+.nav__nazwa{
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  line-height: 1.05;
+  display:flex; flex-direction:column;
+}
+.nav__nazwa small{
+  font-family: var(--sans);
+  font-size: .6rem;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+  color: var(--brzoza);
+  font-weight: 500;
+}
+
+.nav__linki{ display:flex; gap: 1.9rem; }
+.nav__linki a{
+  font-size: .88rem; font-weight: 500;
+  position: relative; padding: .3rem 0;
+}
+.nav__linki a::after{
+  content:""; position:absolute; left:0; right:0; bottom:0;
+  height:1px; background: var(--karmel);
+  transform: scaleX(0); transform-origin: right;
+  transition: transform .35s ease;
+}
+.nav__linki a:hover::after{ transform: scaleX(1); transform-origin: left; }
+
+.nav__tel{
+  padding: .62rem 1.4rem;
+  border: 1px solid var(--espresso);
+  border-radius: 999px;
+  font-size: .84rem; font-weight: 600;
+  transition: background .25s, color .25s;
+}
+.nav__tel:hover{ background: var(--espresso); color: var(--krem); }
+
+.nav__burger{ display:none; background:none; border:0; cursor:pointer; width:34px; height:26px; position:relative; }
+.nav__burger span{ position:absolute; left:0; right:0; height:1.5px; background: var(--espresso); transition: transform .3s ease, opacity .3s; }
+.nav__burger span:nth-child(1){ top: 8px; }
+.nav__burger span:nth-child(2){ bottom: 8px; }
+.nav__burger[aria-expanded="true"] span:nth-child(1){ transform: translateY(4.5px) rotate(45deg); }
+.nav__burger[aria-expanded="true"] span:nth-child(2){ transform: translateY(-4.5px) rotate(-45deg); }
+
+/* ——— hero ——— */
+.hero{
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero__media{ position:absolute; inset:0; z-index:-1; }
+
+.hero__video{
+  width:100%; height:100%;
+  object-fit: cover;
+  transition: opacity 1.4s ease;
+}
+
+/* Tło po wideo: wnętrze salonu wycięte z 4,2 s klipu.
+   Klip kończy się prawie bielą, więc obraz „wywołuje się" ze światła —
+   dlatego wchodzi z lekkim oddaleniem i potem bardzo powoli najeżdża. */
+.hero__tlo{
+  position:absolute; inset:0;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 1.6s ease;
+}
+.hero__tlo::before{
+  content:"";
+  position:absolute; inset:-4%;
+  background: url("media/hero/salon.jpg") center/cover no-repeat;
+  transform: scale(1.04);
+  transition: transform 2.4s cubic-bezier(.22,1,.36,1);
+}
+.hero__media.jest-otwarte .hero__tlo::before{
+  animation: oddech 34s ease-in-out 1.6s infinite alternate;
+}
+@keyframes oddech{
+  from{ transform: scale(1.04) translate3d(0,0,0); }
+  to  { transform: scale(1.11) translate3d(-1.2%, -1%, 0); }
+}
+
+/* Welon: czytelność napisów bez zabielania całego kadru.
+   Ciepłe światło w lewym górnym rogu + kremowa poświata pod tekstem
+   + zejście do koloru strony na dole, żeby hero wtapiało się w sekcję niżej. */
+.hero__tlo::after{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(64% 56% at 46% 50%, rgba(250,246,240,.76) 0%, rgba(250,246,240,.36) 56%, rgba(250,246,240,0) 80%),
+    radial-gradient(75% 55% at 8% 4%, rgba(255,236,205,.55) 0%, rgba(255,236,205,0) 60%),
+    linear-gradient(to bottom, rgba(250,246,240,.42) 0%, rgba(250,246,240,0) 26%, rgba(243,235,224,0) 62%, rgba(243,235,224,.9) 92%, var(--krem-ciep) 100%);
+}
+
+/* Ciepła poświata, która bardzo wolno dryfuje — dzięki niej kadr po zatrzymaniu
+   wideo nadal żyje, ale nic nie miga i nie rozprasza. */
+.hero__blask{
+  position:absolute; inset:0;
+  pointer-events:none;
+  opacity: 0;
+  transition: opacity 2.4s ease .6s;
+  background:
+    radial-gradient(38% 42% at 22% 68%, rgba(207,162,104,.30) 0%, rgba(207,162,104,0) 70%),
+    radial-gradient(30% 34% at 78% 26%, rgba(255,244,224,.55) 0%, rgba(255,244,224,0) 72%);
+}
+.hero__media.jest-otwarte .hero__blask{
+  opacity: 1;
+  animation: dryf 26s ease-in-out infinite alternate;
+}
+@keyframes dryf{
+  from{ transform: translate3d(-2%, 1.5%, 0) scale(1); }
+  to  { transform: translate3d(3%, -2%, 0) scale(1.08); }
+}
+
+/* hero poza ekranem = nic się nie liczy */
+.hero.poza-ekranem .hero__tlo::before,
+.hero.poza-ekranem .hero__blask{ animation-play-state: paused; }
+
+.hero__media.jest-otwarte .hero__video{ opacity: 0; }
+.hero__media.jest-otwarte .hero__tlo{ opacity: 1; }
+
+.hero__tresc{
+  position: relative;
+  /* Odstępy liczone w `vh`, bo przy telefonie w poziomie albo niskim laptopie
+     to wysokość jest wąskim gardłem, nie szerokość. */
+  padding:
+    calc(var(--nav-h) + clamp(.5rem, 3vh, 2rem))
+    var(--margines)
+    clamp(2.5rem, 9vh, 5rem);
+  max-width: 760px;
+  transition: opacity 1.1s ease, transform 1.1s cubic-bezier(.22,1,.36,1);
+}
+.js .hero__tresc{ opacity: 0; transform: translateY(22px); }
+.hero.jest-gotowy .hero__tresc{ opacity:1; transform:none; }
+
+.hero__nad{
+  font-size: .74rem; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--brzoza); font-weight: 600; margin-bottom: clamp(.55rem, 2vh, 1.3rem);
+}
+.hero__tytul{
+  font-family: var(--serif);
+  font-weight: 400;
+  /* `min(10vw, 13vh)` pilnuje obu wymiarów naraz — bez tego napis na telefonie
+     w poziomie (np. 740×360) rósł do 74 px i wypychał przyciski poza ekran. */
+  font-size: clamp(2.6rem, min(10vw, 13vh), 6.2rem);
+  line-height: .95;
+  letter-spacing: -.02em;
+}
+.hero__tytul em{ font-style: italic; color: var(--karmel); }
+.hero__opis{
+  margin: clamp(.8rem, 2.4vh, 1.6rem) auto clamp(1.3rem, 3.4vh, 2.4rem);
+  max-width: 44ch;
+  color: var(--brzoza);
+  font-size: 1.02rem;
+}
+.hero__akcje{ display:flex; gap:.9rem; justify-content:center; flex-wrap:wrap; }
+
+.hero__strzalka{
+  position:absolute; bottom: clamp(1rem, 3vh, 2.2rem); left:50%;
+  width: 22px; height: 34px;
+  margin-left: -11px;
+  border: 1px solid rgba(44,35,32,.3);
+  border-radius: 999px;
+  opacity: 0;
+  transition: opacity 1s ease .4s;
+}
+.hero__strzalka::after{
+  content:""; position:absolute; left:50%; top: 8px;
+  width:3px; height:3px; margin-left:-1.5px;
+  border-radius:50%; background: var(--espresso);
+  animation: spad 1.9s infinite;
+}
+.hero.jest-gotowy .hero__strzalka{ opacity: 1; }
+@keyframes spad{ 0%{ transform:translateY(0); opacity:0 } 30%{opacity:1} 100%{ transform:translateY(15px); opacity:0 } }
+
+/* ——— usługi ——— */
+.uslugi{ padding: clamp(4rem, 10vw, 8rem) var(--margines); background: var(--krem-ciep); }
+.uslugi__wrap{ max-width: var(--max); margin:0 auto; }
+.karty{
+  margin-top: 3rem;
+  display:grid; gap: 1px;
+  /* Liczba kolumn na sztywno, nie przez `auto-fit`: sześć kafli dzieli się
+     bez reszty przez 1, 2 i 3, więc w siatce nigdy nie zostaje pusta komórka
+     (a przez 1 px odstępu prześwitywałoby przez nią ciemne tło siatki). */
+  grid-template-columns: 1fr;
+  background: rgba(44,35,32,.1);
+  border: 1px solid rgba(44,35,32,.1);
+}
+.karta{
+  background: var(--krem-ciep);
+  /* na wąskim ekranie sztywne 2 rem z każdej strony zjadało jedną trzecią
+     szerokości i tekst łamał się po trzy słowa */
+  padding: clamp(1.6rem, 4vw, 2.4rem) clamp(1.25rem, 3.5vw, 2rem) clamp(1.8rem, 4.5vw, 2.6rem);
+  transition: background .35s ease;
+}
+.karta:hover{ background: var(--krem); }
+.karta__nr{
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  color: var(--karmel);
+  letter-spacing: .06em;
+}
+.karta h3{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin: .5rem 0 .7rem;
+}
+.karta p{ color: var(--brzoza); font-size: .93rem; }
+
+/* ——— cennik ——— */
+.cennik{ padding: clamp(4rem, 10vw, 8rem) var(--margines); }
+.cennik__wrap{ max-width: var(--max); margin:0 auto; }
+.cennik__wstep{ margin-top: 1.2rem; max-width: 56ch; color: var(--brzoza); font-size:.98rem; }
+.cennik__kolumny{
+  margin-top: 3rem;
+  display:grid; gap: 2.6rem 4rem;
+  grid-template-columns: 1fr;
+}
+.cennik__grupa h3{
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.55rem;
+  padding-bottom: .7rem;
+  border-bottom: 1px solid var(--piasek);
+  margin-bottom: .4rem;
+}
+.cennik__grupa dl > div{
+  display:flex; align-items:baseline; gap: .8rem;
+  padding: .72rem 0;
+  border-bottom: 1px dotted rgba(44,35,32,.16);
+}
+.cennik__grupa dt{ font-size: .94rem; }
+.cennik__grupa dd{
+  margin-left:auto;
+  font-weight: 600;
+  font-size: .94rem;
+  color: var(--karmel);
+  white-space: nowrap;
+}
+.cennik__stopka{ margin-top: 2.4rem; font-size: .82rem; color: var(--brzoza); }
+
+/* ——— galeria ——— */
+.galeria{ padding: clamp(4rem, 10vw, 8rem) var(--margines); background: var(--espresso); color: var(--krem); }
+.galeria__wrap{ max-width: var(--max); margin:0 auto; }
+.galeria .etykieta{ color: var(--karmel-ja); }
+.galeria__wstep{ margin-top: 1.1rem; color: rgba(250,246,240,.6); font-size:.98rem; }
+
+.galeria__siatka{
+  margin-top: 2.8rem;
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: clamp(8px, 1vw, 14px);
+  grid-auto-rows: clamp(170px, 20vw, 280px);
+}
+.kafel{
+  position: relative;
+  overflow: hidden;
+  border-radius: 3px;
+  background:
+    linear-gradient(135deg, rgba(180,134,79,.28), rgba(250,246,240,.06)),
+    var(--brzoza);
+  background-size: cover;
+  background-position: center;
+  display:flex; align-items:flex-end;
+}
+/* Wysoki i szeroki kafel to kompozycja pomyślana pod cztery kolumny —
+   przy mniejszej liczbie rozjeżdża siatkę, więc spany włączam dopiero tam
+   (reguła jest przy progu 1060 px). */
+.kafel::before{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(to top, rgba(20,15,13,.75), rgba(20,15,13,0) 55%);
+}
+.kafel figcaption{
+  position: relative;
+  padding: 1rem 1.2rem;
+  font-size: .82rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+/* kafelki bez zdjęcia — subtelny znak wodny zamiast pustki */
+.kafel:not(.ma-foto)::after{
+  content: "F";
+  position:absolute; inset:0;
+  display:grid; place-items:center;
+  font-family: var(--serif);
+  font-size: 4.5rem;
+  color: rgba(250,246,240,.13);
+}
+
+/* ——— kontakt ——— */
+.kontakt{ padding: clamp(4rem, 10vw, 8rem) var(--margines); }
+.kontakt__wrap{
+  max-width: var(--max); margin:0 auto;
+  display:grid; gap: 3.5rem;
+  /* Tu są tylko dwa bloki. `auto-fit` na szerokim monitorze robił cztery
+     kolumny, z czego dwie puste, i wypychał treść do lewej połowy ekranu. */
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+.kontakt__zachęta{ margin: 1.4rem 0 2rem; color: var(--brzoza); max-width: 40ch; }
+.kontakt__dane{ margin-top: 2.6rem; display:grid; gap: 1.4rem; }
+.kontakt__dane dt{
+  font-size:.7rem; letter-spacing:.2em; text-transform:uppercase;
+  color: var(--karmel); font-weight:600; margin-bottom:.3rem;
+}
+.kontakt__dane dd{ font-size: 1rem; }
+.kontakt__dane a{ border-bottom: 1px solid var(--piasek); }
+/* numer jest tu najważniejszą informacją — wizyty umawiane są tylko telefonicznie */
+/* wyższa waga niż `.kontakt__dane dd`, inaczej numer zostaje przy 1 rem */
+.kontakt__dane dd.kontakt__numer{ font-family: var(--serif); font-size: 2rem; line-height: 1.15; }
+.kontakt__numer a{ border-bottom-color: var(--karmel); }
+.kontakt__numer a:hover{ color: var(--karmel); }
+
+.kontakt__prawa{
+  background: var(--krem-ciep);
+  padding: clamp(1.5rem, 4vw, 2.2rem) clamp(1.25rem, 3.5vw, 2rem);
+  border-radius: 4px;
+  border-top: 2px solid var(--karmel);
+}
+.godziny__tytul{
+  font-family: var(--serif); font-weight:600; font-size:1.5rem; margin-bottom:1.2rem;
+}
+.godziny{ width:100%; border-collapse: collapse; }
+.godziny th, .godziny td{
+  padding: .58rem 0;
+  font-weight: 400;
+  font-size: .93rem;
+  text-align: left;
+  border-bottom: 1px dotted rgba(44,35,32,.16);
+}
+.godziny td{ text-align:right; font-weight:600; }
+.godziny tr:last-child th, .godziny tr:last-child td{ border-bottom:0; }
+.godziny--zamkniete th, .godziny--zamkniete td{ color: var(--brzoza); font-weight:400; }
+.godziny tr.jest-dzis th, .godziny tr.jest-dzis td{ color: var(--karmel); font-weight:700; }
+.kontakt__mapa{
+  display:inline-block; margin-top:1.4rem;
+  font-size:.86rem; font-weight:600; color: var(--karmel);
+}
+.kontakt__mapa:hover{ text-decoration: underline; }
+
+/* ——— stopka ——— */
+.stopka{
+  padding: 3.4rem var(--margines) 3.8rem;
+  text-align:center;
+  /* jasna stopka, żeby zmieściło się w niej to samo kolorowe logo
+     co w rogu strony — na ciemnym tle jego ciemna kreska ginęła */
+  background: var(--krem);
+  border-top: 1px solid var(--piasek);
+  color: var(--brzoza);
+  font-size: .85rem;
+}
+.stopka__nazwa{
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 1.2rem + 1.6vw, 2.6rem);
+  line-height: 1.1;
+  margin-bottom: .4rem;
+}
+.stopka__nazwa em{ font-style: italic; color: var(--karmel); }
+
+/* w demie nie ma dokąd prowadzić, więc napis zostaje bez odnośnika */
+.kontakt__mapa--nieczynna{ opacity: .45; cursor: default; }
+.stopka__adres{ margin: .5rem 0 1.4rem; }
+.stopka__prawa{ font-size:.76rem; color: rgba(109,92,80,.65); }
+
+/* ——— kursor-nożyczki ———
+   Systemowy kursor chowa dopiero skrypt (klasa `kursor-nozyczki` na <html>),
+   więc bez JS-u albo na dotyku zostaje normalna strzałka. */
+.kursor-nozyczki, .kursor-nozyczki body,
+.kursor-nozyczki a, .kursor-nozyczki button, .kursor-nozyczki summary,
+.kursor-nozyczki label, .kursor-nozyczki [role="button"],
+.kursor-nozyczki .btn, .kursor-nozyczki .kafel,
+.kursor-nozyczki .nav__burger{ cursor: none; }
+
+.kursor{
+  position: fixed; top: 0; left: 0;
+  width: 26px; height: 26px;
+  pointer-events: none;
+  z-index: 9999;
+  color: var(--karmel);
+  opacity: 0;
+  transition: opacity .25s;
+  will-change: transform;
+  filter: drop-shadow(0 1px 3px rgba(44,35,32,.45));
+}
+.kursor.jest-widoczny{ opacity: 1; }
+.kursor svg{ width:100%; height:100%; overflow: visible; display:block; }
+
+.kursor__obrot{
+  width:100%; height:100%;
+  transform: rotate(-28deg);
+  transition: transform .3s cubic-bezier(.22,1,.36,1);
+}
+/* nad czymś klikalnym nożyczki rosną — to zastępuje łapkę, której już nie widać */
+.kursor.nad-klikalnym .kursor__obrot{ transform: rotate(-28deg) scale(1.22); }
+
+.kursor__ramie{
+  transform-origin: 50px 50px;
+  transition: transform .3s cubic-bezier(.3,1.4,.4,1);
+}
+.kursor__ramie--a{ transform: rotate(20deg); }
+.kursor__ramie--b{ transform: rotate(-20deg); }
+/* kliknięcie = ostrza się schodzą */
+.kursor.ciach .kursor__ramie--a{ transform: rotate(2deg);  transition-duration: .1s; }
+.kursor.ciach .kursor__ramie--b{ transform: rotate(-2deg); transition-duration: .1s; }
+
+/* ciepła poświata płynąca za myszką z opóźnieniem */
+.poswiata{
+  position: fixed; top: 0; left: 0;
+  width: 460px; height: 460px;
+  margin: -230px 0 0 -230px;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle closest-side,
+    rgba(180,134,79,.13) 0%, rgba(180,134,79,.055) 42%, rgba(180,134,79,0) 72%);
+  filter: blur(28px);
+  transition: opacity .6s;
+  will-change: transform;
+}
+.poswiata.jest-widoczny{ opacity: 1; }
+
+/* dotyk: żadnego z tych efektów */
+@media (hover: none), (pointer: coarse){
+  .kursor, .poswiata{ display: none; }
+}
+
+/* ——— wejścia sekcji przy przewijaniu ———
+   Każdy element wjeżdża z dołu, a rodzeństwo w jednym rzędzie dostaje kaskadę
+   opóźnień (0 / 0,1 / 0,2 s), więc sekcja składa się od lewej do prawej,
+   zamiast pojawiać się jednym blokiem. */
+.anim{
+  transform: translateY(var(--anim-y, 26px));
+  opacity: 0;
+  transition:
+    opacity .8s cubic-bezier(.22,1,.36,1) var(--anim-zw, 0s),
+    transform .8s cubic-bezier(.22,1,.36,1) var(--anim-zw, 0s);
+}
+.anim.jest-widoczny{ opacity: 1; transform: none; }
+
+/* nagłówki wchodzą odrobinę dalej — prowadzą wzrok w głąb sekcji */
+.naglowek.anim{ --anim-y: 34px; }
+
+/* kafle galerii dodatkowo lekko się przybliżają */
+.kafel.anim{ transform: translateY(26px) scale(.97); }
+.kafel.anim.jest-widoczny{ transform: none; }
+
+/* pozycje cennika wjeżdżają rzędami wewnątrz swojej grupy */
+.cennik__grupa dl > div{
+  transition: opacity .6s ease var(--anim-zw, 0s), transform .6s ease var(--anim-zw, 0s);
+}
+.js .cennik__grupa dl > div{ opacity: 0; transform: translateY(14px); }
+.cennik__grupa.jest-widoczny dl > div{ opacity: 1; transform: none; }
+
+/* wiersze godzin — to samo, tylko delikatniej */
+.godziny tbody tr{
+  transition: opacity .5s ease var(--anim-zw, 0s), transform .5s ease var(--anim-zw, 0s);
+}
+.js .godziny tbody tr{ opacity: 0; transform: translateY(10px); }
+.kontakt__prawa.jest-widoczny .godziny tbody tr{ opacity: 1; transform: none; }
+
+/* ——— progi siatek ———
+   Trzymam je w jednym miejscu, żeby dało się je czytać razem. Każda siatka
+   ma taką liczbę kolumn, przez którą liczba jej elementów dzieli się bez reszty. */
+@media (min-width: 560px){
+  .galeria__siatka{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 700px){
+  .karty{ grid-template-columns: repeat(2, 1fr); }
+  .cennik__kolumny{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 800px){
+  .galeria__siatka{ grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 900px){
+  .kontakt__wrap{ grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+@media (min-width: 1060px){
+  .karty{ grid-template-columns: repeat(3, 1fr); }
+  .galeria__siatka{ grid-template-columns: repeat(4, 1fr); }
+  .kafel--duzy{ grid-row: span 2; }
+  .kafel--szeroki{ grid-column: span 2; }
+}
+@media (min-width: 1500px){
+  .cennik__kolumny{ grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ——— bardzo niskie ekrany: telefon trzymany poziomo (360–430 px wysokości) ———
+   Tu liczy się każdy piksel, żeby przycisk „Zadzwoń" został nad zgięciem.
+   Ściskam pasek, tytuł i wszystkie odstępy pionowe. */
+@media (max-height: 450px){
+  :root{ --nav-h: 54px; }
+  .hero__tytul{ font-size: clamp(2.2rem, min(10vw, 12vh), 6.2rem); }
+  .hero__tresc{ padding-top: calc(var(--nav-h) + .25rem); padding-bottom: 1rem; }
+  .hero__nad{ margin-bottom: .4rem; letter-spacing: .18em; }
+  .hero__opis{ margin: .5rem auto .9rem; font-size: .95rem; line-height: 1.45; }
+}
+
+/* Najciaśniejszy realny przypadek: stary iPhone SE trzymany poziomo (320 px
+   wysokości). Bez tego oba przyciski schodziły kilkanaście pikseli pod zgięcie. */
+@media (max-height: 360px){
+  :root{ --nav-h: 48px; }
+  .hero__tytul{ font-size: clamp(2rem, min(10vw, 11vh), 6.2rem); }
+  .hero__opis{ font-size: .88rem; margin: .35rem auto .7rem; }
+  .hero__akcje .btn{ padding: .7rem 1.4rem; font-size: .86rem; }
+}
+
+/* ——— niskie ekrany: telefon w poziomie, stary laptop ———
+   Przy takiej wysokości strzałka „przewiń niżej" i tak nie ma gdzie usiąść,
+   a pasek nawigacji zjadałby zbyt duży kawałek kadru. */
+@media (max-height: 620px){
+  .hero__strzalka{ display: none; }
+  .kontakt__dane{ margin-top: 1.6rem; }
+}
+
+/* ——— duże ekrany ———
+   Powyżej tej szerokości siatki same by się nie zagęściły, bo `auto-fit`
+   zatrzymuje się na liczbie kolumn, a nie na ich szerokości. */
+@media (min-width: 1600px){
+  .galeria__siatka{ grid-auto-rows: clamp(200px, 15vw, 300px); }
+}
+
+/* ——— telefony ——— */
+@media (max-width: 860px){
+  .nav__burger{ display:block; }
+  .nav__tel{ display:none; }
+  .nav__linki{
+    position: fixed; inset: var(--nav-h) 0 auto 0;
+    flex-direction: column; gap: 0;
+    background: var(--krem);
+    border-bottom: 1px solid rgba(44,35,32,.08);
+    padding: .5rem 1.4rem 1.6rem;
+    transform: translateY(-130%);
+    transition: transform .45s cubic-bezier(.22,1,.36,1);
+  }
+  .nav__linki.jest-otwarte{ transform: none; }
+  .nav__linki a{ padding: .9rem 0; border-bottom: 1px dotted rgba(44,35,32,.14); font-size: 1rem; }
+
+  /* w pionie 16:9 przycina się do środka, czyli do samego okna — przesuwam
+     kadr w lewo, żeby było widać fotele i lustro, a nie samą jasną ścianę */
+  .hero__tlo::before{ background-position: 30% center; }
+
+  .cennik__kolumny{ gap: 2.2rem; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation: none !important; transition-duration: .01ms !important; }
+  html{ scroll-behavior: auto; }
+  /* !important, bo reguły chowające mają wyższą wagę przez prefiks `.js` */
+  .hero__tresc, .anim, .cennik__grupa dl > div, .godziny tbody tr,
+  .kafel.anim{ opacity:1 !important; transform:none !important; }
+  .nav{ transform:none !important; }
+}

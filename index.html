@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Studio Fryzur Ambra | fryzjer damski, męski i dziecięcy</title>
+<meta name="description" content="Studio Fryzur Ambra — strzyżenie, koloryzacja, upięcia okolicznościowe i pielęgnacja włosów. Projekt demonstracyjny, dane są fikcyjne.">
+<meta property="og:title" content="Studio Fryzur Ambra">
+<meta property="og:description" content="Strzyżenie, koloryzacja, upięcia i pielęgnacja włosów — przykładowa strona salonu.">
+<meta property="og:type" content="website">
+<!-- Strona pokazowa: nie ma jej w wynikach wyszukiwania, żeby nikt nie wziął jej za istniejący salon. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="media/ikona-180.png">
+</head>
+<body>
+
+<!-- Kursor-nożyczki i złota poświata za myszką. Oba elementy pokazuje dopiero
+     skrypt i tylko przy wskaźniku typu myszka — na dotyku zostaje systemowy. -->
+<div class="poswiata" id="poswiata" aria-hidden="true"></div>
+<div class="kursor" id="kursor" aria-hidden="true">
+  <div class="kursor__obrot">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <g class="kursor__ramie kursor__ramie--a" fill="currentColor" fill-rule="evenodd">
+        <path d="M50,6 C51.8,20 52.6,34 52.6,44 L53,60 A9,9 0 1,1 47,60 L47.4,44 C47.4,34 48.2,20 50,6 Z M55.5,68.5 A5.5,5.5 0 1,0 44.5,68.5 A5.5,5.5 0 1,0 55.5,68.5 Z"></path>
+      </g>
+      <g class="kursor__ramie kursor__ramie--b" fill="currentColor" fill-rule="evenodd">
+        <path d="M50,6 C51.8,20 52.6,34 52.6,44 L53,60 A9,9 0 1,1 47,60 L47.4,44 C47.4,34 48.2,20 50,6 Z M55.5,68.5 A5.5,5.5 0 1,0 44.5,68.5 A5.5,5.5 0 1,0 55.5,68.5 Z"></path>
+        <path d="M58,73 C64,74.5 65,69.5 61,68 C63,70.5 61.5,73 58,73 Z"></path>
+      </g>
+      <circle cx="50" cy="50" r="2.4" fill="#8a6a3c" stroke="currentColor" stroke-width=".6"></circle>
+    </svg>
+  </div>
+</div>
+
+<!-- ——— nawigacja ——— -->
+<header class="nav" id="nav">
+  <a class="nav__logo" href="#gora" aria-label="Studio Fryzur Ambra — strona główna">
+    <span class="nav__nazwa">Ambra<small>Studio Fryzur</small></span>
+  </a>
+  <nav class="nav__linki">
+    <a href="#uslugi">Usługi</a>
+    <a href="#cennik">Cennik</a>
+    <a href="#galeria">Galeria</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
+  <a class="nav__tel" href="tel:+48123456789" data-telefon>Umów wizytę</a>
+  <button class="nav__burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+</header>
+
+<!-- ——— hero ——— -->
+<section class="hero" id="gora">
+  <div class="hero__media" id="heroMedia">
+    <!-- Źródło ustawia skrypt: na telefonie leci lżejszy plik (0,6 MB zamiast 3,4). -->
+    <video class="hero__video" id="heroVideo" playsinline muted autoplay preload="auto" poster="media/hero/poster.jpg"></video>
+    <div class="hero__tlo" aria-hidden="true"></div>
+    <div class="hero__blask" aria-hidden="true"></div>
+  </div>
+
+  <div class="hero__tresc">
+    <p class="hero__nad">Salon fryzjerski</p>
+    <h1 class="hero__tytul">Studio Fryzur<br><em>Ambra</em></h1>
+    <p class="hero__opis">Strzyżenie, koloryzacja, upięcia i pielęgnacja włosów.<br>Strzygę panie, panów i dzieci — na spokojnie, o umówionej godzinie.</p>
+    <div class="hero__akcje">
+      <a class="btn btn--pelny" href="tel:+48123456789" data-telefon>Zadzwoń i umów się</a>
+      <a class="btn btn--pusty" href="#cennik">Zobacz cennik</a>
+    </div>
+  </div>
+
+  <a class="hero__strzalka" href="#uslugi" aria-label="Przewiń niżej"></a>
+</section>
+
+<!-- ——— usługi ——— -->
+<section class="uslugi" id="uslugi">
+  <div class="uslugi__wrap">
+    <p class="etykieta">Czym się zajmuję</p>
+    <h2 class="naglowek">Usługi</h2>
+
+    <div class="karty">
+      <article class="karta">
+        <span class="karta__nr">01</span>
+        <h3>Strzyżenie damskie</h3>
+        <p>Strzyżenie z myciem i modelowaniem, podcięcie końcówek, grzywka. Dobieram długość i kształt do rodzaju włosa oraz do tego, ile masz rano czasu na układanie.</p>
+      </article>
+      <article class="karta">
+        <span class="karta__nr">02</span>
+        <h3>Strzyżenie męskie i dziecięce</h3>
+        <p>Klasyka, maszynka, fade, broda. Dzieci strzygę spokojnie i szybko — pierwsza wizyta bez stresu.</p>
+      </article>
+      <article class="karta">
+        <span class="karta__nr">03</span>
+        <h3>Koloryzacja</h3>
+        <p>Farbowanie jednolite, odrosty, refleksy, sombre i baleyage, rozjaśnianie. Przed koloryzacją zawsze sprawdzam stan włosów i mówię wprost, co da się uzyskać na jednej wizycie.</p>
+      </article>
+      <article class="karta">
+        <span class="karta__nr">04</span>
+        <h3>Upięcia okolicznościowe</h3>
+        <p>Fryzury ślubne, komunijne i na studniówkę. Przed uroczystością możemy zrobić fryzurę próbną.</p>
+      </article>
+      <article class="karta">
+        <span class="karta__nr">05</span>
+        <h3>Pielęgnacja i regeneracja</h3>
+        <p>Zabiegi odbudowujące dla włosów po rozjaśnianiu, nawilżanie, ampułki, maski pod ciepłem. Podpowiem też, czym myć włosy w domu.</p>
+      </article>
+      <article class="karta">
+        <span class="karta__nr">06</span>
+        <h3>Modelowanie</h3>
+        <p>Fale, prostowanie, lokówka, modelowanie na okazję — robię je także bez strzyżenia.</p>
+      </article>
+    </div>
+  </div>
+
+</section>
+
+<!-- ——— cennik ——— -->
+<section class="cennik" id="cennik">
+  <div class="cennik__wrap">
+    <p class="etykieta">Ile to kosztuje</p>
+    <h2 class="naglowek">Cennik</h2>
+    <p class="cennik__wstep">Ceny koloryzacji i zabiegów zależą od długości i gęstości włosów —
+      dokładną kwotę podaję na miejscu, zanim zacznę pracę.</p>
+
+    <div class="cennik__kolumny">
+      <div class="cennik__grupa">
+        <h3>Strzyżenie</h3>
+        <dl>
+          <div><dt>Strzyżenie damskie z myciem i modelowaniem</dt><dd>80 zł</dd></div>
+          <div><dt>Podcięcie końcówek</dt><dd>50 zł</dd></div>
+          <div><dt>Strzyżenie męskie</dt><dd>45 zł</dd></div>
+          <div><dt>Strzyżenie dziecięce (do 10 lat)</dt><dd>35 zł</dd></div>
+          <div><dt>Broda / kontur</dt><dd>25 zł</dd></div>
+        </dl>
+      </div>
+
+      <div class="cennik__grupa">
+        <h3>Koloryzacja</h3>
+        <dl>
+          <div><dt>Farbowanie odrostu</dt><dd>od 90 zł</dd></div>
+          <div><dt>Farbowanie całości</dt><dd>od 140 zł</dd></div>
+          <div><dt>Refleksy / pasemka</dt><dd>od 180 zł</dd></div>
+          <div><dt>Sombre, baleyage</dt><dd>od 250 zł</dd></div>
+          <div><dt>Dekoloryzacja / rozjaśnianie</dt><dd>wycena indywidualna</dd></div>
+        </dl>
+      </div>
+
+      <div class="cennik__grupa">
+        <h3>Pielęgnacja</h3>
+        <dl>
+          <div><dt>Mycie i modelowanie</dt><dd>40 zł</dd></div>
+          <div><dt>Maska regenerująca</dt><dd>od 40 zł</dd></div>
+          <div><dt>Zabieg odbudowujący</dt><dd>od 90 zł</dd></div>
+          <div><dt>Ampułka</dt><dd>od 30 zł</dd></div>
+        </dl>
+      </div>
+
+      <div class="cennik__grupa">
+        <h3>Upięcia i okazje</h3>
+        <dl>
+          <div><dt>Upięcie okolicznościowe</dt><dd>od 120 zł</dd></div>
+          <div><dt>Fryzura ślubna</dt><dd>od 200 zł</dd></div>
+          <div><dt>Fryzura próbna</dt><dd>od 100 zł</dd></div>
+          <div><dt>Modelowanie / fale</dt><dd>od 60 zł</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <p class="cennik__stopka">Przyjmuję gotówkę i BLIK-a. Ceny obowiązują od 2026 r.</p>
+  </div>
+</section>
+
+<!-- ——— galeria ——— -->
+<section class="galeria" id="galeria">
+  <div class="galeria__wrap">
+    <p class="etykieta">Moje prace</p>
+    <h2 class="naglowek">Galeria</h2>
+    <p class="galeria__wstep">Metamorfozy, koloryzacje i upięcia prosto z mojego fotela.</p>
+
+    <div class="galeria__siatka">
+      <figure class="kafel kafel--duzy" data-foto="media/foto/1.jpg"><figcaption>Koloryzacja</figcaption></figure>
+      <figure class="kafel" data-foto="media/foto/2.jpg"><figcaption>Strzyżenie damskie</figcaption></figure>
+      <figure class="kafel" data-foto="media/foto/3.jpg"><figcaption>Upięcie ślubne</figcaption></figure>
+      <figure class="kafel" data-foto="media/foto/4.jpg"><figcaption>Baleyage</figcaption></figure>
+      <figure class="kafel" data-foto="media/foto/5.jpg"><figcaption>Strzyżenie męskie</figcaption></figure>
+      <figure class="kafel kafel--szeroki" data-foto="media/foto/6.jpg"><figcaption>Regeneracja</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ——— kontakt ——— -->
+<section class="kontakt" id="kontakt">
+  <div class="kontakt__wrap">
+    <div class="kontakt__lewa">
+      <p class="etykieta">Zapraszamy</p>
+      <h2 class="naglowek">Kontakt i godziny</h2>
+      <p class="kontakt__zachęta">Wizyty umawiam telefonicznie — najlepiej dzwoń w godzinach pracy salonu.
+        Jeśli nie odbieram, jestem przy kliencie: oddzwonię.</p>
+
+      <a class="btn btn--pelny btn--duzy" href="tel:+48123456789" data-telefon>Zadzwoń</a>
+
+      <dl class="kontakt__dane">
+        <div><dt>Telefon</dt><dd class="kontakt__numer"><a href="tel:+48123456789" data-telefon>123 456 789</a></dd></div>
+        <div><dt>Salon prowadzi</dt><dd>Anna Wiśniewska</dd></div>
+        <div><dt>Adres</dt><dd>ul. Lipowa 14<br>00-000 Przykładowo</dd></div>
+      </dl>
+    </div>
+
+    <div class="kontakt__prawa">
+      <h3 class="godziny__tytul">Godziny otwarcia</h3>
+      <table class="godziny">
+        <tbody>
+          <tr><th>Poniedziałek</th><td>9:00 – 17:00</td></tr>
+          <tr><th>Wtorek</th><td>9:00 – 17:00</td></tr>
+          <tr><th>Środa</th><td>9:00 – 17:00</td></tr>
+          <tr><th>Czwartek</th><td>9:00 – 17:00</td></tr>
+          <tr><th>Piątek</th><td>9:00 – 18:00</td></tr>
+          <tr><th>Sobota</th><td>8:00 – 13:00</td></tr>
+          <tr class="godziny--zamkniete"><th>Niedziela</th><td>nieczynne</td></tr>
+        </tbody>
+      </table>
+      <span class="kontakt__mapa kontakt__mapa--nieczynna">Otwórz w mapach →</span>
+    </div>
+  </div>
+</section>
+
+<footer class="stopka">
+  <p class="stopka__nazwa">Studio Fryzur <em>Ambra</em></p>
+  <p class="stopka__adres">Anna Wiśniewska · ul. Lipowa 14 · 00-000 Przykładowo</p>
+  <p class="stopka__prawa">© <span id="rok">2026</span> Studio Fryzur Ambra · projekt demonstracyjny, dane są fikcyjne</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

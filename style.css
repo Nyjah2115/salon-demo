@@ -285,26 +285,20 @@ img, video{ display:block; max-width:100%; }
 @keyframes spad{ 0%{ transform:translateY(0); opacity:0 } 30%{opacity:1} 100%{ transform:translateY(15px); opacity:0 } }
 
 /* ——— rezerwacja ———
-   Opis po lewej, widget po prawej; poniżej 900 px jedno pod drugim.
-   Widget stoi na białej karcie — na kremowym tle salonu przycisk
-   i wolne godziny czytają się wyraźniej. */
+   Układ poziomy: nagłówek u góry na pełną szerokość, widget pod nim.
+   Wcześniej stał w wąskiej kolumnie obok tekstu i rósł w dół na 1100 px;
+   na całej szerokości zabiegi mieszczą się w dwóch kolumnach i cała
+   rezerwacja jest niższa niż jeden ekran. */
 .rezerwacja{ padding: clamp(4rem, 10vw, 8rem) var(--margines); background: var(--krem-ciep); }
-.rezerwacja__wrap{
-  max-width: var(--max); margin:0 auto;
-  display:grid; gap: clamp(2rem, 4vw, 4rem);
-  grid-template-columns: 1fr;
-  align-items:start;
-}
-@media (min-width: 900px){
-  .rezerwacja__wrap{ grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); }
-  .rezerwacja__wstep{ position: sticky; top: calc(var(--nav-h) + 2rem); }
-}
-.rezerwacja__opis{ margin-top: 1.2rem; max-width: 44ch; color: var(--brzoza); font-size:.98rem; }
+.rezerwacja__wrap{ max-width: var(--max); margin:0 auto; }
+.rezerwacja__wstep{ max-width: 46ch; }
+.rezerwacja__opis{ margin-top: 1.2rem; color: var(--brzoza); font-size:.98rem; }
 .rezerwacja__ramka{
-  background:#fff;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  background: var(--krem);
+  border: 1px solid var(--piasek);
   border-radius: 18px;
-  padding: clamp(.4rem, 1.5vw, 1rem);
-  box-shadow: 0 30px 60px -30px rgba(44,35,32,.35);
+  padding: clamp(.5rem, 1.6vw, 1.4rem);
   min-height: 420px;
 }
 .rezerwacja__ramka iframe{ display:block; width:100%; border:0; }

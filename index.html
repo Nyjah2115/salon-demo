@@ -45,10 +45,11 @@
   <nav class="nav__linki">
     <a href="#uslugi">Usługi</a>
     <a href="#cennik">Cennik</a>
+    <a href="#rezerwacja">Rezerwacja</a>
     <a href="#galeria">Galeria</a>
     <a href="#kontakt">Kontakt</a>
   </nav>
-  <a class="nav__tel" href="tel:+48123456789" data-telefon>Umów wizytę</a>
+  <a class="nav__tel" href="#rezerwacja">Umów wizytę</a>
   <button class="nav__burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
 </header>
 
@@ -66,7 +67,7 @@
     <h1 class="hero__tytul">Studio Fryzur<br><em>Ambra</em></h1>
     <p class="hero__opis">Strzyżenie, koloryzacja, upięcia i pielęgnacja włosów.<br>Strzygę panie, panów i dzieci — na spokojnie, o umówionej godzinie.</p>
     <div class="hero__akcje">
-      <a class="btn btn--pelny" href="tel:+48123456789" data-telefon>Zadzwoń i umów się</a>
+      <a class="btn btn--pelny" href="#rezerwacja">Umów się online</a>
       <a class="btn btn--pusty" href="#cennik">Zobacz cennik</a>
     </div>
   </div>
@@ -172,6 +173,24 @@
   </div>
 </section>
 
+<!-- ——— rezerwacja ———
+     Widget umowterminy.pl, salon pokazowy „ambra-demo” (zabiegi z cennika
+     wyżej, godziny z sekcji Kontakt). Rezerwacje trafiają do Dawida, nie
+     do żadnego prawdziwego salonu. -->
+<section class="rezerwacja" id="rezerwacja">
+  <div class="rezerwacja__wrap">
+    <div class="rezerwacja__wstep">
+      <p class="etykieta">Umów się online</p>
+      <h2 class="naglowek">Wybierz usługę<br>i <em>wolny termin</em></h2>
+      <p class="rezerwacja__opis">Widzisz tylko godziny, które naprawdę są wolne. Potwierdzenie
+        przyjdzie na e-mail, a dzień przed wizytą przypomnienie. Nie trzeba zakładać konta.</p>
+    </div>
+    <div class="rezerwacja__ramka">
+      <div id="rezerwacje"></div>
+    </div>
+  </div>
+</section>
+
 <!-- ——— galeria ——— -->
 <section class="galeria" id="galeria">
   <div class="galeria__wrap">
@@ -196,8 +215,8 @@
     <div class="kontakt__lewa">
       <p class="etykieta">Zapraszamy</p>
       <h2 class="naglowek">Kontakt i godziny</h2>
-      <p class="kontakt__zachęta">Wizyty umawiam telefonicznie — najlepiej dzwoń w godzinach pracy salonu.
-        Jeśli nie odbieram, jestem przy kliencie: oddzwonię.</p>
+      <p class="kontakt__zachęta">Najszybciej umówisz się <a href="#rezerwacja">online</a> — wolne terminy widać od razu.
+        Wolisz porozmawiać? Dzwoń w godzinach pracy salonu. Jeśli nie odbieram, jestem przy kliencie: oddzwonię.</p>
 
       <a class="btn btn--pelny btn--duzy" href="tel:+48123456789" data-telefon>Zadzwoń</a>
 
@@ -233,5 +252,13 @@
 </footer>
 
 <script src="script.js"></script>
+<script src="https://umowterminy.pl/embed.js"
+        data-salon="ambra-demo"
+        data-accent="#9a6b36"
+        data-bg="#ffffff"
+        data-text="#2c2320"
+        data-radius="14"
+        data-font="Manrope, -apple-system, 'Segoe UI', sans-serif"
+        data-target="#rezerwacje"></script>
 </body>
 </html>

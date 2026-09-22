@@ -97,7 +97,8 @@
     '.etykieta', '.naglowek', '.cennik__wstep', '.galeria__wstep',
     '.kontakt__zachęta', '.btn--duzy', '.kontakt__dane', '.karta',
     '.cennik__grupa', '.cennik__stopka', '.kafel', '.kontakt__prawa',
-    '.stopka__logo', '.stopka__adres', '.stopka__prawa'
+    '.stopka__logo', '.stopka__adres', '.stopka__prawa',
+    '.rezerwacja__opis', '.rezerwacja__ramka'
   ].join(', ');
 
   var KROK = 0.1;   // sekundy między sąsiadami w rzędzie

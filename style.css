@@ -348,6 +348,31 @@ img, video{ display:block; max-width:100%; }
 }
 .karta p{ color: var(--brzoza); font-size: .93rem; }
 
+/* ——— rezerwacja ———
+   Opis po lewej, widget po prawej; poniżej 900 px jedno pod drugim.
+   Widget stoi na białej karcie — na kremowym tle salonu przycisk
+   i wolne godziny czytają się wyraźniej. */
+.rezerwacja{ padding: clamp(4rem, 10vw, 8rem) var(--margines); background: var(--krem-ciep); }
+.rezerwacja__wrap{
+  max-width: var(--max); margin:0 auto;
+  display:grid; gap: clamp(2rem, 4vw, 4rem);
+  grid-template-columns: 1fr;
+  align-items:start;
+}
+@media (min-width: 900px){
+  .rezerwacja__wrap{ grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); }
+  .rezerwacja__wstep{ position: sticky; top: calc(var(--nav-h) + 2rem); }
+}
+.rezerwacja__opis{ margin-top: 1.2rem; max-width: 44ch; color: var(--brzoza); font-size:.98rem; }
+.rezerwacja__ramka{
+  background:#fff;
+  border-radius: 18px;
+  padding: clamp(.4rem, 1.5vw, 1rem);
+  box-shadow: 0 30px 60px -30px rgba(44,35,32,.35);
+  min-height: 420px;
+}
+.rezerwacja__ramka iframe{ display:block; width:100%; border:0; }
+
 /* ——— cennik ——— */
 .cennik{ padding: clamp(4rem, 10vw, 8rem) var(--margines); }
 .cennik__wrap{ max-width: var(--max); margin:0 auto; }
@@ -465,6 +490,7 @@ img, video{ display:block; max-width:100%; }
   align-items: start;
 }
 .kontakt__zachęta{ margin: 1.4rem 0 2rem; color: var(--brzoza); max-width: 40ch; }
+.kontakt__zachęta a{ color: var(--karmel); text-decoration: underline; text-underline-offset: 3px; }
 .kontakt__dane{ margin-top: 2.6rem; display:grid; gap: 1.4rem; }
 .kontakt__dane dt{
   font-size:.7rem; letter-spacing:.2em; text-transform:uppercase;

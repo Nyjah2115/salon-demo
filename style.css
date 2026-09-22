@@ -19,8 +19,11 @@
      żeby treść pod paskiem trzymała się tej samej linii. */
   --margines: clamp(1.1rem, 4vw, 2.6rem);
 
-  --serif: "Cormorant Garamond", Georgia, serif;
-  --sans:  "Manrope", -apple-system, "Segoe UI", sans-serif;
+  /* Jeden krój na całą stronę — Plus Jakarta Sans. Zmienna `--serif`
+     została pod nazwą, bo używa jej kilkanaście reguł (nagłówki, numer
+     telefonu, logo); wskazuje teraz ten sam krój w cięższej odmianie. */
+  --serif: "Plus Jakarta Sans", -apple-system, "Segoe UI", sans-serif;
+  --sans:  "Plus Jakarta Sans", -apple-system, "Segoe UI", sans-serif;
 
   --nav-h: clamp(64px, 6vw + 40px, 92px);
 }
@@ -59,10 +62,13 @@ img, video{ display:block; max-width:100%; }
 
 .naglowek{
   font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(2.1rem, 5vw, 3.3rem);
-  line-height: 1.12;
-  letter-spacing: -.01em;
+  /* Po przejściu z szeryfowego Cormoranta na Plus Jakarta Sans waga 400
+     wyglądała blado, a światło między literami za duże — nagłówek
+     rozłaził się w poprzek. Stąd 600 i ciaśniejszy trakking. */
+  font-weight: 600;
+  font-size: clamp(2rem, 4.6vw, 3rem);
+  line-height: 1.14;
+  letter-spacing: -.028em;
 }
 .naglowek em{ font-style: italic; color: var(--karmel); }
 
@@ -106,7 +112,9 @@ img, video{ display:block; max-width:100%; }
 }
 .nav__nazwa{
   font-family: var(--serif);
-  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  font-size: 1.2rem;
   line-height: 1.05;
   display:flex; flex-direction:column;
 }
@@ -250,12 +258,12 @@ img, video{ display:block; max-width:100%; }
 }
 .hero__tytul{
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: 700;
   /* `min(10vw, 13vh)` pilnuje obu wymiarów naraz — bez tego napis na telefonie
      w poziomie (np. 740×360) rósł do 74 px i wypychał przyciski poza ekran. */
-  font-size: clamp(2.6rem, min(10vw, 13vh), 6.2rem);
-  line-height: .95;
-  letter-spacing: -.02em;
+  font-size: clamp(2.4rem, min(9vw, 12vh), 5.4rem);
+  line-height: 1;
+  letter-spacing: -.035em;
 }
 .hero__tytul em{ font-style: italic; color: var(--karmel); }
 .hero__opis{
@@ -374,7 +382,7 @@ img, video{ display:block; max-width:100%; }
 .kontakt__dane a{ border-bottom: 1px solid var(--piasek); }
 /* numer jest tu najważniejszą informacją — wizyty umawiane są tylko telefonicznie */
 /* wyższa waga niż `.kontakt__dane dd`, inaczej numer zostaje przy 1 rem */
-.kontakt__dane dd.kontakt__numer{ font-family: var(--serif); font-size: 2rem; line-height: 1.15; }
+.kontakt__dane dd.kontakt__numer{ font-family: var(--serif); font-weight: 700; letter-spacing: -.02em; font-size: 1.8rem; line-height: 1.15; }
 .kontakt__numer a{ border-bottom-color: var(--karmel); }
 .kontakt__numer a:hover{ color: var(--karmel); }
 
@@ -385,7 +393,7 @@ img, video{ display:block; max-width:100%; }
   border-top: 2px solid var(--karmel);
 }
 .godziny__tytul{
-  font-family: var(--serif); font-weight:600; font-size:1.5rem; margin-bottom:1.2rem;
+  font-family: var(--serif); font-weight:700; letter-spacing:-.02em; font-size:1.4rem; margin-bottom:1.2rem;
 }
 .godziny{ width:100%; border-collapse: collapse; }
 .godziny th, .godziny td{
@@ -418,7 +426,9 @@ img, video{ display:block; max-width:100%; }
 }
 .stopka__nazwa{
   font-family: var(--serif);
-  font-size: clamp(1.7rem, 1.2rem + 1.6vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -.025em;
+  font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.2rem);
   line-height: 1.1;
   margin-bottom: .4rem;
 }

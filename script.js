@@ -175,6 +175,28 @@
     document.addEventListener('mouseenter', function () { if (ruszony) kursor.classList.add('jest-widoczny'); });
   }
 
+  /* ——— nożyczki znikają nad rezerwacją ———
+     Widget siedzi w ramce z innej domeny, więc ruch myszy w jego środku
+     nie dochodzi do tej strony: nożyczki zatrzymywały się w miejscu, w którym
+     wjechały w ramkę, i wisiały nad listą zabiegów. Nad ramką chowamy więc
+     nożyczki razem z poświatą i oddajemy systemowy wskaźnik — w formularzu
+     i tak potrzebna jest strzałka i kursor tekstowy.
+
+     `mouseenter`/`mouseleave` na ramce wystarczają: zdarzenie wejścia pada
+     jeszcze na element ramki, zanim wskaźnik zniknie w środku. `blur` okna
+     to zapas na wypadek, gdy ktoś wejdzie w ramkę klawiszem Tab. */
+  var ramkaWidgetu = document.querySelector('.rezerwacja__ramka');
+  if (ramkaWidgetu) {
+    var chowaj = function (tak) {
+      document.documentElement.classList.toggle('nad-widgetem', tak);
+    };
+    ramkaWidgetu.addEventListener('mouseenter', function () { chowaj(true); });
+    ramkaWidgetu.addEventListener('mouseleave', function () { chowaj(false); });
+    window.addEventListener('blur', function () {
+      if (document.activeElement && document.activeElement.tagName === 'IFRAME') chowaj(true);
+    });
+  }
+
   /* ——— ciepła poświata za myszką ———
      Płynie wolniej niż nożyczki, więc ciągnie się za nimi jak miękki cień. */
   var poswiata = document.getElementById('poswiata');

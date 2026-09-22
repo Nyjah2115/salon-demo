@@ -460,6 +460,11 @@ img, video{ display:block; max-width:100%; }
   filter: drop-shadow(0 1px 3px rgba(44,35,32,.45));
 }
 .kursor.jest-widoczny{ opacity: 1; }
+/* Nad ramką rezerwacji nożyczki i poświata gasną, a systemowy wskaźnik wraca. */
+.nad-widgetem .kursor.jest-widoczny,
+.nad-widgetem .poswiata.jest-widoczny{ opacity: 0; }
+.kursor-nozyczki .rezerwacja__ramka,
+.kursor-nozyczki .rezerwacja__ramka iframe{ cursor: auto; }
 .kursor svg{ width:100%; height:100%; overflow: visible; display:block; }
 
 .kursor__obrot{

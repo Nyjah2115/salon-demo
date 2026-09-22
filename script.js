@@ -94,9 +94,9 @@
      swojego rodzica (modulo 3). W siatkach daje to kaskadę rzędami, a w bloku
      nagłówka kolejność: etykieta → tytuł → akapit. Animacja gra raz. */
   var DO_ANIMACJI = [
-    '.etykieta', '.naglowek', '.cennik__wstep', '.galeria__wstep',
-    '.kontakt__zachęta', '.btn--duzy', '.kontakt__dane', '.karta',
-    '.cennik__grupa', '.cennik__stopka', '.kafel', '.kontakt__prawa',
+    '.etykieta', '.naglowek', '.galeria__wstep',
+    '.kontakt__zachęta', '.btn--duzy', '.kontakt__dane',
+    '.kafel', '.kontakt__prawa',
     '.stopka__logo', '.stopka__adres', '.stopka__prawa',
     '.rezerwacja__opis', '.rezerwacja__ramka'
   ].join(', ');
@@ -121,9 +121,9 @@
     });
   });
 
-  /* Pozycje w cenniku i wiersze godzin animują się wewnątrz swojego bloku —
-     opóźnienie liczone po kolei, żeby lista „spływała" z góry na dół. */
-  document.querySelectorAll('.cennik__grupa dl > div, .godziny tbody tr').forEach(function (el) {
+  /* Wiersze godzin animują się wewnątrz swojego bloku — opóźnienie
+     liczone po kolei, żeby lista „spływała" z góry na dół. */
+  document.querySelectorAll('.godziny tbody tr').forEach(function (el) {
     var i = Array.prototype.indexOf.call(el.parentElement.children, el);
     el.style.setProperty('--anim-zw', (0.18 + i * 0.06) + 's');
   });

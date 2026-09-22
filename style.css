@@ -599,3 +599,26 @@ img, video{ display:block; max-width:100%; }
   .kafel.anim{ opacity:1 !important; transform:none !important; }
   .nav{ transform:none !important; }
 }
+
+/* ——— wyśrodkowanie treści ———
+   Wszystkie napisy na stronie stoją w osi. Sekcje mają kolumny o stałej
+   mierze (np. 46ch), więc samo `text-align` nie wystarcza — kolumna też
+   musi trafić na środek, stąd `margin-inline: auto` przy każdej z nich.
+   Tabela godzin zostaje wyjątkiem: dzień przy lewej, godzina przy prawej,
+   bo wyśrodkowane dwie kolumny zlewają się w jedną plamę. */
+.hero__tresc{ margin-inline: auto; text-align: center; }
+.hero__akcje{ justify-content: center; }
+
+.rezerwacja__wstep{ margin-inline: auto; text-align: center; }
+.rezerwacja__opis{ margin-inline: auto; }
+
+.galeria__wrap{ text-align: center; }
+.galeria__wstep{ margin-inline: auto; max-width: 56ch; }
+/* Podpis kafla był dociśnięty do lewej krawędzi zdjęcia. */
+.kafel{ justify-content: center; }
+.kafel figcaption{ text-align: center; }
+
+.kontakt__lewa{ text-align: center; }
+.kontakt__zachęta{ margin-inline: auto; }
+.kontakt__prawa{ text-align: center; }
+.godziny__tytul{ text-align: center; }
